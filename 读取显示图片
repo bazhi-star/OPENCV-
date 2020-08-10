@@ -1,0 +1,27 @@
+int Show_Picture() {
+	const char* imagename = "C:\\Users\\shaodd\\Desktop\\sdd_temp\\demo\\test.png";//此处为你自己的图片路径
+
+	Mat img = imread(imagename, 1);//从文件中读入图像
+
+	//如果读入图像失败
+	if (img.empty())
+	{
+		fprintf(stderr, "Can not load image %s\n", imagename);
+		return -1;
+	}
+
+	/*
+	WINDOW_AUTOSIZE 窗口大小自动适应图片大小，并且不可手动更改
+	WINDOW_NORMAL 用户可以通过拖拽改变这个窗口大小
+	WINDOW_OPENGL 窗口创建的时候会支持OpenGL
+	*/
+	//namedWindow("mytestpicture", WINDOW_AUTOSIZE);
+	namedWindow("mytestpicture", WINDOW_NORMAL);
+	
+	//显示图像
+	imshow("mytestpicture", img);//显示图片名称
+
+	//此函数等待按键，按键盘任意键就返回
+	waitKey(0);
+	return 0;
+}
