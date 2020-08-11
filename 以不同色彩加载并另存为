@@ -1,0 +1,37 @@
+int Modify_Picture() {//修改图片另存为
+	Mat src = imread("C:\\Users\\shaodd\\Desktop\\sdd_temp\\demo\\test.png", IMREAD_UNCHANGED);
+	
+	/*IMREAD_UNCHANGED(<0)表示加载原图，不做任何改变。
+	IMREAD_GRAYSCALE(0)表示把原图作为灰度图像加载进来。
+	IMREAD_COLOR(>0)表示把原图作为RGB图像加载进来。*/
+	
+	if (src.empty()) {
+		printf("could not find the image...\n");
+		return -1;
+	}
+
+	//cv::namedWindow的功能是创建一个OpenCV窗口，它是由OpenCV自动创建与释放，用户无需销毁它。
+	namedWindow("src", WINDOW_AUTOSIZE);
+
+	//cv::imshow根据窗口名称显示图像到指定的窗口上去，第一个参数是窗口名称，第二个参数是Mat对象。
+	imshow("src", src);
+
+	Mat src_gray;//创建新对象
+	
+	/*cv::cvtColor的功能是把图像从一个彩色空间转换到另一个彩色空间，有三个参数，第一个参数表示源图像，
+	第二个参数表示彩色空间转换之后的图像，第三个参数表示源和目标色彩空间，如：COLOR_BGR2HLS、COLOR_BGR2GRAY等。
+	HLS彩色空间：色调（H），亮度（L），饱和度（S）。*/
+	
+	cvtColor(src, src_gray, COLOR_BGR2GRAY);
+
+	namedWindow("src_gray", WINDOW_AUTOSIZE);
+	imshow("src_gray", src_gray);
+
+	/*cv::imwrite可以保存图像到指定目录路径。
+	只有8位、16位的PNG、JPG、Tiff文件格式而且是单通道或者三通道的BGR图像才可以通过这种方式保存。
+	保存PNG格式的时候可以保存透明通道的图片。
+	可以指定压缩参数。*/
+	imwrite("C:\\Users\\shaodd\\Desktop\\sdd_temp\\demo\\new_test.png", src_gray);
+
+	waitKey(0);
+}
